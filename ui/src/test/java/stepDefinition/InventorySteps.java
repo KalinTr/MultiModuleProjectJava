@@ -40,7 +40,7 @@ public class InventorySteps {
                 .click();
     }
 
-    @Then("the user should see page header is {string}")
+    @Then("the user should see cart page header is {string}")
     public void theUserShouldSeePageHeaderIsYourCart(String cartHeaderValue) {
         assertThat(pageProvider.getPage().getByTestId(cartPage.CartHeader))
                 .containsText(cartHeaderValue);
