@@ -52,10 +52,6 @@ public class LoginSteps {
         System.out.println("Step 4: Click the login button");
     }
 
-    @Then("the user should see Home page displayed")
-    public void theUserShouldSeeHomePageDisplayed() {
-    }
-
     @Then("the user should see page header value is {string}")
     public void theUserShouldSeeHeaderValueIs(String headerValue) {
         assertThat(pageProvider.getPage().getByTestId(inventoryPage.Header)).containsText(headerValue);

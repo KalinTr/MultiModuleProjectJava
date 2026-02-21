@@ -11,7 +11,7 @@ Feature: UI Scenario
       Then the user should see page header value is 'Products'
       When the user adds the desire product 'Sauce Labs Backpack' to the cart
       And the user opens the cart
-#      And the user proceeds to checkout
-#      And the user enters valid checkout information
+      Then the user should see page header is 'Your Cart'
+      When the user clicks checkout button
 #      And the user confirms the order
 #      Then the user should see the order confirmation message
