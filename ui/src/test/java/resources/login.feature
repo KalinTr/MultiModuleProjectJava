@@ -9,3 +9,9 @@ Feature: UI Scenario
       And the user enter valid password
       And the user click on the login button
       Then the user should see page header value is 'Products'
+      When the user adds the desire product 'Sauce Labs Backpack' to the cart
+      And the user opens the cart
+#      And the user proceeds to checkout
+#      And the user enters valid checkout information
+#      And the user confirms the order
+#      Then the user should see the order confirmation message

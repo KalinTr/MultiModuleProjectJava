@@ -6,7 +6,7 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import lombok.RequiredArgsConstructor;
-import org.example.pages.HomePage;
+import org.example.pages.InventoryPage;
 import org.example.pages.LoginPage;
 import org.springframework.beans.factory.annotation.Value;
 
@@ -26,7 +26,7 @@ public class LoginSteps {
 
     private final PlaywrightPageProvider pageProvider;
     private final LoginPage loginPage;
-    private final HomePage homePage;
+    private final InventoryPage inventoryPage;
 
     @Given("the user navigate to the Login page")
     public void theUserNavigateToTheLoginPage() {
@@ -58,6 +58,6 @@ public class LoginSteps {
 
     @Then("the user should see page header value is {string}")
     public void theUserShouldSeeHeaderValueIs(String headerValue) {
-        assertThat(pageProvider.getPage().getByTestId(homePage.Header)).containsText(headerValue);
+        assertThat(pageProvider.getPage().getByTestId(inventoryPage.Header)).containsText(headerValue);
     }
 }
