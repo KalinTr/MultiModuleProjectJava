@@ -1,43 +1,63 @@
 package stepDefinition;
 
-import Drivers.PlaywrightInstanceProvider;
+import Drivers.PlaywrightPageProvider;
 import io.cucumber.java.en.Given;
-import io.cucumber.java.en.When;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
+import io.cucumber.java.en.When;
+import lombok.RequiredArgsConstructor;
+import org.example.pages.InventoryPage;
 import org.example.pages.LoginPage;
+import org.springframework.beans.factory.annotation.Value;
 
+import static com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat;
+
+@RequiredArgsConstructor
 public class LoginSteps {
 
+    @Value("${ui.base.url}")
+    private String baseUrl;
+
+    @Value("${ui.username}")
+    private String username;
+
+    @Value("${ui.password}")
+    private String password;
+
+    private final PlaywrightPageProvider pageProvider;
     private final LoginPage loginPage;
+    private final InventoryPage inventoryPage;
 
-    public LoginSteps(LoginPage loginPage) {
-        this.loginPage = loginPage;
-    }
-
-    @Given("the website is opened")
-    public void the_website_is_opened() {
-        PlaywrightInstanceProvider.getInstance().getPage().navigate("https://www.saucedemo.com/");
+    @Given("the user navigate to the Login page")
+    public void theUserNavigateToTheLoginPage() {
+        pageProvider.getPage().navigate(baseUrl);
         System.out.println("Step 0: Website is opened");
     }
 
-    @And("the user enter username")
-    public void the_user_enter_username() {
-        PlaywrightInstanceProvider.getInstance().getPage().locator(loginPage.UsernameField).fill("standard_user");
+    @When("the user enter valid username")
+    public void theUserEnterValidUsername() {
+        pageProvider.getPage().locator(loginPage.UsernameField).fill(username);
         System.out.println("Step 2: The user enter username");
     }
 
-    @And("the user enter password")
-    public void the_user_enter_password() {
+    @And("the user enter valid password")
+    public void theUserEnterValidPassword() {
+        pageProvider.getPage().getByTestId(loginPage.PasswordField).fill(password);
         System.out.println("Step 3: The user enter password");
     }
 
-    @Then("Click the login button")
-    public void Click_the_login_button() {
+    @And("the user click on the login button")
+    public void theUserClickOnTheLoginButton() {
+        pageProvider.getPage().getByTestId(loginPage.LoginButton).click();
         System.out.println("Step 4: Click the login button");
     }
 
+    @Then("the user should see Home page displayed")
+    public void theUserShouldSeeHomePageDisplayed() {
+    }
+
+    @Then("the user should see page header value is {string}")
+    public void theUserShouldSeeHeaderValueIs(String headerValue) {
+        assertThat(pageProvider.getPage().getByTestId(inventoryPage.Header)).containsText(headerValue);
+    }
 }
-
-
-

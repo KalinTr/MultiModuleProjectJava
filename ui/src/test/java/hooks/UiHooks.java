@@ -1,18 +1,25 @@
 package hooks;
 
-import Drivers.PlaywrightInstanceProvider;
-import io.cucumber.java.After;
+import Drivers.PlaywrightPageProvider;
+import com.microsoft.playwright.Page;
 import io.cucumber.java.Before;
+import lombok.RequiredArgsConstructor;
 
+@RequiredArgsConstructor
 public class UiHooks {
 
-    @Before(value = "@ui", order = 1)
-    public void preparePlaywrightInstance() {
-        PlaywrightInstanceProvider.getInstance().preparePlaywrightInstance();
-    }
+    public Page page;
+    private final PlaywrightPageProvider pageProvider;
 
-    @After(value = "@ui", order = 1)
-    public void tearDownPlaywright() {
-        PlaywrightInstanceProvider.clear();
-    }
+     @Before(value = "@ui", order = 1)
+     public void preparePlaywrightInstance() {
+         page = pageProvider.getPage();
+     }
+    // @After(value = "@ui", order = 1)
+    // public void tearDownPlaywright() {
+    //     pageProvider.close();
+    // }
+    // --- END OLD CODE ---
+    // Cleanup is automatic: PlaywrightPageProvider implements DisposableBean.
+    // Spring calls destroy() when the @ScenarioScope bean is disposed.
 }
