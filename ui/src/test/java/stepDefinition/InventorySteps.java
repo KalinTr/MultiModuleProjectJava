@@ -1,15 +1,11 @@
 package stepDefinition;
 
 import Drivers.PlaywrightPageProvider;
-import com.microsoft.playwright.Locator;
-import com.microsoft.playwright.options.WaitForSelectorState;
-import io.cucumber.java.PendingException;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import io.cucumber.spring.ScenarioScope;
 import lombok.RequiredArgsConstructor;
-import org.example.pages.CartPage;
+import org.example.pages.CheckoutPage;
 import org.example.pages.InventoryPage;
 import org.springframework.beans.factory.annotation.Value;
 
@@ -23,26 +19,29 @@ public class InventorySteps {
 
     private final PlaywrightPageProvider pageProvider;
     private final InventoryPage inventoryPage;
-    private final CartPage cartPage;
+    private final CheckoutPage checkoutPage;
 
-    @When("the user adds the desire product {string} to the cart")
-    public void theUserAddsProductToTheCart(String productName) {
+    @When("the user navigates to the inventory screen")
+    public void theUserNavigatesToTheInventoryScreen() {
+        assertThat(pageProvider.getPage().getByTestId(inventoryPage.getHeader()))
+                .containsText("Products");
+    }
+
+    @And("the user add product to the cart")
+    public void theUserAddProductToTheCart() {
+
         inventoryPage.addProductToCart(productName);
     }
 
-    @And("the user opens the cart")
-    public void theUserOpensTheCart() {
-        pageProvider.getPage()
-                .locator(inventoryPage.Cart)
-                .waitFor(new Locator.WaitForOptions().setState(WaitForSelectorState.VISIBLE).setTimeout(5000));
-        pageProvider.getPage()
-                .locator(inventoryPage.Cart)
-                .click();
+    @And("the user navigates to the cart")
+    public void theUserNavigatesToTheCart() {
+
+        inventoryPage.openCart();
     }
 
-    @Then("the user should see cart page header is {string}")
-    public void theUserShouldSeePageHeaderIsYourCart(String cartHeaderValue) {
-        assertThat(pageProvider.getPage().getByTestId(cartPage.CartHeader))
-                .containsText(cartHeaderValue);
+    @Then("Verify successful order submission")
+    public void verifySuccessfulOrderSubmission() {
+        assertThat(pageProvider.getPage().locator(checkoutPage.CheckoutHeader))
+                .containsText("Your Cart!");
     }
 }
