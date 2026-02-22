@@ -13,6 +13,6 @@
 
         @When("the user clicks checkout button")
         public void clickCheckoutButton() {
-            pageProvider.getPage().locator(cartPage.CheckoutButton).click();
+            pageProvider.getPage().locator(cartPage.getCheckoutButton()).click();
         }
     }

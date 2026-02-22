@@ -17,7 +17,6 @@ public class LoginPage {
     private final String LoginButton = "#login-button";
 
     private void enterUsername(String username) {
-
         pageProvider.getPage().locator(UsernameField).fill(username);
     }
 
@@ -26,7 +25,6 @@ public class LoginPage {
     }
 
     private void clickLoginButton() {
-
         pageProvider.getPage().locator(LoginButton).click();
     }
 

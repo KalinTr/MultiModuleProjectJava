@@ -2,7 +2,6 @@ package stepDefinition;
 
 import Drivers.PlaywrightPageProvider;
 import io.cucumber.java.en.And;
-import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import lombok.RequiredArgsConstructor;
 import org.example.pages.CheckoutPage;
@@ -29,19 +28,11 @@ public class InventorySteps {
 
     @And("the user add product to the cart")
     public void theUserAddProductToTheCart() {
-
         inventoryPage.addProductToCart(productName);
     }
 
     @And("the user navigates to the cart")
     public void theUserNavigatesToTheCart() {
-
         inventoryPage.openCart();
-    }
-
-    @Then("Verify successful order submission")
-    public void verifySuccessfulOrderSubmission() {
-        assertThat(pageProvider.getPage().locator(checkoutPage.CheckoutHeader))
-                .containsText("Your Cart!");
     }
 }

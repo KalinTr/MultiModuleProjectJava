@@ -25,7 +25,6 @@ public class LoginSteps {
 
     private final PlaywrightPageProvider pageProvider;
     private final LoginPage loginPage;
-    private final InventoryPage inventoryPage;
 
     @Given("the user navigates to the Login page")
     public void theUserNavigateToTheLoginPage() {
