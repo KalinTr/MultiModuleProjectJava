@@ -16,16 +16,16 @@ public class LoginPage {
     private final String PasswordField = "#password";
     private final String LoginButton = "#login-button";
 
-    public void enterUsername(String username) {
+    private void enterUsername(String username) {
 
         pageProvider.getPage().locator(UsernameField).fill(username);
     }
 
-    public void enterPassword(String password) {
+    private void enterPassword(String password) {
         pageProvider.getPage().locator(PasswordField).fill(password);
     }
 
-    public void clickLoginButton() {
+    private void clickLoginButton() {
 
         pageProvider.getPage().locator(LoginButton).click();
     }
