@@ -1,6 +1,7 @@
 package org.example.pages;
 
 import Drivers.PlaywrightPageProvider;
+import lombok.Getter;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -12,13 +13,13 @@ public class CheckoutPage {
         this.pageProvider = pageProvider;
     }
 
-    public final String CheckoutHeader = ".title";
-    public final String FirstName = "#first-name";
-    public final String LastName = "#last-name";
-    public final String PostalCode = "#postal-code";
-    public final String ContinueButton = "#continue";
-    public final String FinishButton = "#finish";
-    public final String CompleteHeader = ".complete-header";
+    @Getter
+    private final String CheckoutHeader = ".title";
+    private final String FirstName = "#first-name";
+    private final String LastName = "#last-name";
+    private final String PostalCode = "#postal-code";
+    private final String ContinueButton = "#continue";
+    private final String FinishButton = "#finish";
 
     private void fillFirstName(String firstName) {
         pageProvider.getPage().locator(FirstName).fill(firstName);
@@ -33,6 +34,7 @@ public class CheckoutPage {
     }
 
     private void clickContinue() {
+
         pageProvider.getPage().locator(ContinueButton).click();
     }
 
