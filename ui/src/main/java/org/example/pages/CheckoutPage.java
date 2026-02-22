@@ -20,19 +20,19 @@ public class CheckoutPage {
     public final String FinishButton = "#finish";
     public final String CompleteHeader = ".complete-header";
 
-    public void fillFirstName(String firstName) {
+    private void fillFirstName(String firstName) {
         pageProvider.getPage().locator(FirstName).fill(firstName);
     }
 
-    public void fillLastName(String lastName) {
+    private void fillLastName(String lastName) {
         pageProvider.getPage().locator(LastName).fill(lastName);
     }
 
-    public void fillPostalCode(String postalCode) {
+    private void fillPostalCode(String postalCode) {
         pageProvider.getPage().locator(PostalCode).fill(postalCode);
     }
 
-    public void clickContinue() {
+    private void clickContinue() {
         pageProvider.getPage().locator(ContinueButton).click();
     }
 
