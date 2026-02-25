@@ -73,6 +73,7 @@ public class PlaywrightPageProvider {
     private Browser launchBrowser(Playwright playwright) {
         return playwright.chromium().launch(new BrowserType.LaunchOptions()
                 .setHeadless(isHeadless)
+                        .setSlowMo(100)
                 .setTimeout(30000));
     }
 }
